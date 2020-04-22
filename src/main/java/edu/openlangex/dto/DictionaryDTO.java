@@ -1,5 +1,8 @@
 package edu.openlangex.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.domain.Page;
 
 import edu.openlangex.model.Dictionary;
@@ -47,8 +50,12 @@ public class DictionaryDTO {
 		this.meaning = meaning;
 	}
 	
-	public static Page<DictionaryDTO> converter(Page<Dictionary> dictionary_list){
-		return dictionary_list.map(DictionaryDTO::new);
+	public static Page<DictionaryDTO> converter(Page<Dictionary> dictionary_page){
+		return dictionary_page.map(DictionaryDTO::new);
+	}
+	
+	public static List<DictionaryDTO> converter(List<Dictionary> dictionary_list) {
+		return dictionary_list.stream().map(DictionaryDTO::new).collect(Collectors.toList());
 	}
 
 }

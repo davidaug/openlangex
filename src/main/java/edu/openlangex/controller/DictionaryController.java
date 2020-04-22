@@ -1,5 +1,7 @@
 package edu.openlangex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -28,5 +30,10 @@ public class DictionaryController {
     		Pageable pageable){
     	
         return DictionaryDTO.converter(dictionaryRepository.findByLanguage(language, pageable));
+    }
+    
+    @GetMapping("/random")
+    public List<DictionaryDTO> getLanguageDictionaryRandom(@RequestParam(required = true) String language){
+    	return DictionaryDTO.converter(dictionaryRepository.findRandomByLanguage(language));
     }
 }
